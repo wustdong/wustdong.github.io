@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wustdong.github.io/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="导语:    很早之前就创建了自己的blog，之后就一直没有管理。一旦有强烈的愿望去做某件事，那么一切都是水到渠成。    一、创建你的XXX.github.io仓库1. 注册Github账户在Github官网注册个人账户。有邮箱就ok.   2. 创建公共仓库在自己Github主页右下角，创建一个新的repository。注意，此处域名需跟你的账户名一致。比如，我的账户名是wustdong，那么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo搭建个人博客+ NexT主题配置 （Mac篇）">
+<meta property="og:url" content="https://wustdong.github.io/2017/04/24/hexo-build-blog/index.html">
+<meta property="og:site_name" content="晶怪的小屋">
+<meta property="og:description" content="导语:    很早之前就创建了自己的blog，之后就一直没有管理。一旦有强烈的愿望去做某件事，那么一切都是水到渠成。    一、创建你的XXX.github.io仓库1. 注册Github账户在Github官网注册个人账户。有邮箱就ok.   2. 创建公共仓库在自己Github主页右下角，创建一个新的repository。注意，此处域名需跟你的账户名一致。比如，我的账户名是wustdong，那么">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wustdong.github.io/images/blog-hexo-imagessetting.png">
+<meta property="og:updated_time" content="2020-10-14T06:54:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo搭建个人博客+ NexT主题配置 （Mac篇）">
+<meta name="twitter:description" content="导语:    很早之前就创建了自己的blog，之后就一直没有管理。一旦有强烈的愿望去做某件事，那么一切都是水到渠成。    一、创建你的XXX.github.io仓库1. 注册Github账户在Github官网注册个人账户。有邮箱就ok.   2. 创建公共仓库在自己Github主页右下角，创建一个新的repository。注意，此处域名需跟你的账户名一致。比如，我的账户名是wustdong，那么">
+<meta name="twitter:image" content="https://wustdong.github.io/images/blog-hexo-imagessetting.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wustdong.github.io/2017/04/24/hexo-build-blog/"/>
+
+
+
+
+
+  <title>Hexo搭建个人博客+ NexT主题配置 （Mac篇） | 晶怪的小屋</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晶怪的小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://wustdong.github.io/2017/04/24/hexo-build-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://wustdong.github.io/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晶怪的小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hexo搭建个人博客+ NexT主题配置 （Mac篇）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T17:59:38+08:00">
+                2017-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>导语:  </p>
+<blockquote>
+<p>很早之前就创建了自己的blog，之后就一直没有管理。一旦有强烈的愿望去做某件事，那么一切都是水到渠成。  </p>
+</blockquote>
+<h3 id="一、创建你的XXX-github-io仓库"><a href="#一、创建你的XXX-github-io仓库" class="headerlink" title="一、创建你的XXX.github.io仓库"></a>一、创建你的XXX.github.io仓库</h3><h4 id="1-注册Github账户"><a href="#1-注册Github账户" class="headerlink" title="1. 注册Github账户"></a>1. 注册Github账户</h4><p>在<a href="https://github.com/" target="_blank" rel="external">Github官网</a>注册个人账户。有邮箱就ok.  </p>
+<h4 id="2-创建公共仓库"><a href="#2-创建公共仓库" class="headerlink" title="2. 创建公共仓库"></a>2. 创建公共仓库</h4><p>在自己Github主页右下角，创建一个新的repository。注意，此处域名需跟你的账户名一致。比如，我的账户名是wustdong，那么我将创建的repository名为wustdong.github.io.  </p>
+<h3 id="二、安装hexo"><a href="#二、安装hexo" class="headerlink" title="二、安装hexo"></a>二、安装hexo</h3><blockquote>
+<p>在Mac上安装hexo，相当于在本地搭建写博客的环境，每次在本地新建文章（hexo new “article”）后，先在本地预览，然后发布到github；至于页面排版，比如首页文章的排版这些逻辑都是主题里设置好的，你只需要写文章然后发布(这个过程中，hexo可将md文件转换为html文件)。另外在编辑md文件时，添加分类（categories）可在类别页面通过分类查看文章。    </p>
+</blockquote>
+<h4 id="1-安装前提"><a href="#1-安装前提" class="headerlink" title="1. 安装前提"></a>1. 安装前提</h4><p>需要安装 Node.js 和 Git 两个应用程序，直接到官网安装最新版本即可，如已安装请跳过。  </p>
+<ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">node官网</a>  </li>
+<li><a href="https://git-scm.com/" target="_blank" rel="external">git官网</a></li>
+</ul>
+<p>注意，注意hexo要求的node版本。比如：hexo3运行与最新版的node 6.x不兼容，hexo3安装4.4.5版本的nodeJS。<a href="http://nodejs.org/dist/" target="_blank" rel="external">点击这里下载对应版本node</a>    </p>
+<h4 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="2. 安装Hexo"></a>2. 安装Hexo</h4><p>安装完Node.js 及 Git 后，即可使用npm来安装Hexo：    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<p>注意：此处直接使用官方给的命令行安装，可能会报如下错误    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123; [Error: Cannot find module &apos;./build/Release/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</div><div class="line">&#123; [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</div><div class="line">&#123; [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</div></pre></td></tr></table></figure>
+<p>一番尝试后，在我电脑上成功安装hexo的命令为   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g hexo-cli  --no-optional --registry=http://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<h4 id="3-初始化Hexo"><a href="#3-初始化Hexo" class="headerlink" title="3. 初始化Hexo"></a>3. 初始化Hexo</h4><p>创建一个目录用来作为你的blog目录，例如 gitBlog；并在该目录中进行Hexo的初始化： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo init </div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>至此，你就完成了Hexo的安装及初始化，接下来我们就可以进行本地的预览啦：<br>先安装hexo server  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install hexo-server</div></pre></td></tr></table></figure>
+<p>然后生成静态页面并打开hexo本地服务  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo generate   (或 hexo g)</div><div class="line">hexo server</div></pre></td></tr></table></figure>
+<p>注意：本地测试时 <a href="http://localhost:4000，确保翻墙代理（我用得Shadowsocks）已关，否则会遇到本地页面无法连接服务器的提示哦。" target="_blank" rel="external">http://localhost:4000，确保翻墙代理（我用得Shadowsocks）已关，否则会遇到本地页面无法连接服务器的提示哦。</a>  </p>
+<h4 id="4-关联Github账户"><a href="#4-关联Github账户" class="headerlink" title="4.关联Github账户"></a>4.关联Github账户</h4><p>方法一：  首先配置git公钥，即在github账号添加SSH key，首先先确认一下是否已经有一个公钥了。SSH 公钥默认储存在账户的主目录下的 ~/.ssh 目录。进去看看，没有就生成一个：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;wustdong&quot;</div></pre></td></tr></table></figure>
+<p>读取出来： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure>
+<p>将以上生成的公钥复制粘贴到github页面的SSH and GPG keys中.注意：此时接下来的deploy配置中的账户必须是https。推荐方法一，因为这种方式配置的git会记录所有用户的提交。无颜色，不坂本。hhhh…    </p>
+<p>方法二： 最开始我用的deploy配置是ssh，搭配的git关联就比较简单，下载git客户端，输入git账号密码登陆,git客户端会自动配置好公钥。</p>
+<p>关联成功后，然后打开前面创建的gitBlog目录下的 _config.yml 文件，在修改最下方的deploy为：  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line"> type: git</div><div class="line"> repo: git@github.com:[your_account]/[your_account].github.io.git</div><div class="line"> branch: master</div></pre></td></tr></table></figure>
+<p>注意，冒号后面一定要加空格. 例如：如果采用https，则repo为<code>https://github.com/wustdong/wustdong.github.io.git</code>；如果采用ssh,则repo为<code>xgit@github.com:wustdong/wustdong.github.io.git</code>  </p>
+<p>接下来安装hexo的git部署，在命令行中执行：    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>最后，将生成静态页面并部署到github的仓库中，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d -g</div></pre></td></tr></table></figure>
+<p>当提示INFO Deploy done: git 即上传成功，这时就可以通过http:\[your_account].github.io 来访问你的个人站点了.  </p>
+<h3 id="三、个性化主题设置"><a href="#三、个性化主题设置" class="headerlink" title="三、个性化主题设置"></a>三、个性化主题设置</h3><blockquote>
+<p>到这一步，首页已经完成了，接下来是讲解如何更改网站logo,个人头像，主页导航设置以及如何新建发布文章。  </p>
+</blockquote>
+<p>Hexo 安装主题的方式非常简单，只需要将主题文件拷贝至站点目录的 themes 目录下， 然后修改下配置文件即可。具体到 NexT 来说，安装步骤如下。  </p>
+<h4 id="1-安装NexT"><a href="#1-安装NexT" class="headerlink" title="1.安装NexT"></a>1.安装NexT</h4><p>当克隆/下载完成后,   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd your-hexo-site</div><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure>
+<ul>
+<li>设置站点gitBlog/_config.yml的theme字段值为next  </li>
+<li>开启服务hexo s –debug  </li>
+</ul>
+<h4 id="2-主题配置"><a href="#2-主题配置" class="headerlink" title="2.主题配置"></a>2.主题配置</h4><p>通过修改next主题下的_config.yml的scheme字段，配置不同的风格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Schemes</div><div class="line"># scheme: Muse</div><div class="line"># scheme: Mist</div><div class="line">scheme: Pisces</div></pre></td></tr></table></figure>
+<h4 id="3-菜单设置"><a href="#3-菜单设置" class="headerlink" title="3.菜单设置"></a>3.菜单设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">  home: /</div><div class="line">  categories: /categories</div><div class="line">  about: /about</div><div class="line">  archives: /archives</div><div class="line">  # tags: /tags</div><div class="line">  #sitemap: /sitemap.xml</div><div class="line">  #commonweal: /404.html</div></pre></td></tr></table></figure>
+<p>其中，home代表主页，categories代表分类页，about代表关于页面，archives代表归档页，commonweal代表404页面（page not found时候显示的页面）。本站点显示主页，分类页，关于页面和归档页。  </p>
+<h4 id="4-语言设置"><a href="#4-语言设置" class="headerlink" title="4.语言设置"></a>4.语言设置</h4><p>编辑站点配置文件gitBlog/_config.yml将language设置成你所需要的语言。具体值应该在官网指定值中选取。比如   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">language: zh-Hans</div></pre></td></tr></table></figure>
+<h4 id="5-头像设置"><a href="#5-头像设置" class="headerlink" title="5.头像设置"></a>5.头像设置</h4><p>头像设置：编辑站点配置文件gitBlog/config.yml，新增字段 avatar， 值设置成头像的链接地址。其中，头像的链接地址可以是：<br><img src="https://wustdong.github.io/images/blog-hexo-imagessetting.png" alt="imagessetiing-display">   </p>
+<p>博客站点图标设置:  </p>
+<ul>
+<li>通过<a href="http://tool.lu/favicon/" target="_blank" rel="external">favicon在线制作</a>制作favicon图片，logo最好设置32*32</li>
+<li>图片放在next主题source/images目录下</li>
+<li>在next主题配置文件中更改favicon字段。注意此处目录写为绝对路径，个人总结，博客的图标地址都在网站的“/images”文件夹下寻址。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">favicon: https://wustdong.github.io/images/favicon.ico ##此处为网站前面的图标</div></pre></td></tr></table></figure>
+<h4 id="6-添加分类页面"><a href="#6-添加分类页面" class="headerlink" title="6.添加分类页面"></a>6.添加分类页面</h4><p>分类页面可方便快速找到某类型的所有文章。以添加categories页面为例，首先在&lt;主题配置文件&gt;取消注释categories。输入命令：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd gitBlog</div><div class="line">$ hexo new page categories</div></pre></td></tr></table></figure>
+<p>将在gitBlog/source下会新生成一个新的文件夹categories，在该文件夹下会有一个index.md文件。 </p>
+<ul>
+<li>设置页面类型：在上步新生成的gitBlog/source/categories/index.md中添加type: “categories”</li>
+<li>设置具体文章的categories：当要为某一篇文章添加分类，只需在myBlog/source/_post目录下的具体文章的categories中添加分类即可，如  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: are you here</div><div class="line">date: 2016-11-28 22:30:31</div><div class="line">categories: [Mac,效率]</div><div class="line">---</div></pre></td></tr></table></figure>
+<p>可先在本地开启服务后预览效果，点击首页的分类标签，可跳转到分类页面，hexo会从你发布的文章中查找categories标签对文章进行分类后排列在页面。</p>
+<p>其他页面，比如关于我，步骤与添加分类页面类似。不再赘述。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/24/diamonds-assign/" rel="next" title="分钻石游戏">
+                <i class="fa fa-chevron-left"></i> 分钻石游戏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/02/2017-0708-angular/" rel="prev" title="8月小结晶">
+                8月小结晶 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wustdong.github.io/images/avatar.jpeg"
+               alt="Jing" />
+          <p class="site-author-name" itemprop="name">Jing</p>
+           
+              <p class="site-description motion-element" itemprop="description">千里之行，始于足下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、创建你的XXX-github-io仓库"><span class="nav-number">1.</span> <span class="nav-text">一、创建你的XXX.github.io仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-注册Github账户"><span class="nav-number">1.1.</span> <span class="nav-text">1. 注册Github账户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-创建公共仓库"><span class="nav-number">1.2.</span> <span class="nav-text">2. 创建公共仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装hexo"><span class="nav-number">2.</span> <span class="nav-text">二、安装hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装前提"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装前提</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装Hexo"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-初始化Hexo"><span class="nav-number">2.3.</span> <span class="nav-text">3. 初始化Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-关联Github账户"><span class="nav-number">2.4.</span> <span class="nav-text">4.关联Github账户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、个性化主题设置"><span class="nav-number">3.</span> <span class="nav-text">三、个性化主题设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装NexT"><span class="nav-number">3.1.</span> <span class="nav-text">1.安装NexT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-主题配置"><span class="nav-number">3.2.</span> <span class="nav-text">2.主题配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-菜单设置"><span class="nav-number">3.3.</span> <span class="nav-text">3.菜单设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-语言设置"><span class="nav-number">3.4.</span> <span class="nav-text">4.语言设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-头像设置"><span class="nav-number">3.5.</span> <span class="nav-text">5.头像设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-添加分类页面"><span class="nav-number">3.6.</span> <span class="nav-text">6.添加分类页面</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jing</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

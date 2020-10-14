@@ -1,0 +1,750 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wustdong.github.io/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一本小书，带你领略 Ajax 之父——Jesse James Gsrrett 眼中的用户体验。 《用户体验要素》基于“战略层，范围层，结构层，框架层和表现层”五个层面的基础架构来讲解用户体验。作者谈到整个软件产品设计过程中各个层面的一些注意事项，同时，为了避免混淆，还定义了一些业内便于交流的术语。另外，文中讲述了很多开发过程中一些看起来习以为常但实质是有理论依据的案例。整本书排版大方，内容简洁，结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《用户体验要素》读后感">
+<meta property="og:url" content="https://wustdong.github.io/2017/09/24/20170924-the-element-of-user-experience/index.html">
+<meta property="og:site_name" content="晶怪的小屋">
+<meta property="og:description" content="一本小书，带你领略 Ajax 之父——Jesse James Gsrrett 眼中的用户体验。 《用户体验要素》基于“战略层，范围层，结构层，框架层和表现层”五个层面的基础架构来讲解用户体验。作者谈到整个软件产品设计过程中各个层面的一些注意事项，同时，为了避免混淆，还定义了一些业内便于交流的术语。另外，文中讲述了很多开发过程中一些看起来习以为常但实质是有理论依据的案例。整本书排版大方，内容简洁，结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-24T13:41:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《用户体验要素》读后感">
+<meta name="twitter:description" content="一本小书，带你领略 Ajax 之父——Jesse James Gsrrett 眼中的用户体验。 《用户体验要素》基于“战略层，范围层，结构层，框架层和表现层”五个层面的基础架构来讲解用户体验。作者谈到整个软件产品设计过程中各个层面的一些注意事项，同时，为了避免混淆，还定义了一些业内便于交流的术语。另外，文中讲述了很多开发过程中一些看起来习以为常但实质是有理论依据的案例。整本书排版大方，内容简洁，结">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wustdong.github.io/2017/09/24/20170924-the-element-of-user-experience/"/>
+
+
+
+
+
+  <title>《用户体验要素》读后感 | 晶怪的小屋</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晶怪的小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://wustdong.github.io/2017/09/24/20170924-the-element-of-user-experience/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://wustdong.github.io/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晶怪的小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《用户体验要素》读后感
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T15:34:38+08:00">
+                2017-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一本小书，带你领略 Ajax 之父——Jesse James Gsrrett 眼中的用户体验。</p>
+<p>《用户体验要素》基于“战略层，范围层，结构层，框架层和表现层”五个层面的基础架构来讲解用户体验。作者谈到整个软件产品设计过程中各个层面的一些注意事项，同时，为了避免混淆，还定义了一些业内便于交流的术语。另外，文中讲述了很多开发过程中一些看起来习以为常但实质是有理论依据的案例。整本书排版大方，内容简洁，结构分明。下面总结自己看书过程中的一点摘录和感悟。</p>
+<h3 id="产品设计-VS-用户体验设计"><a href="#产品设计-VS-用户体验设计" class="headerlink" title="产品设计 VS 用户体验设计"></a>产品设计 VS 用户体验设计</h3><blockquote>
+<p>“外形服从于功能”，这种观点对于内部运作(用户不可见的部分)是适用的。但是，对于产品直接面对用户的那些部分，正确的产品形态绝不是由“功能”所决定的，而是由“用户自身的心理感受和行为”来决定的。  </p>
+</blockquote>
+<p>产品设计以及开发初级阶段，难免会有专注于功能而选择性忽略界面设计的嫌疑。这个时候在每一步的开发过程中就应该自己花心思来美化界面，<strong>通过一种帮助人们理解和接受的方式来呈现</strong>。感觉这个也需要一定平日积累，经常的情况是：“我知道这个地方很丑，但是不知道怎么改进。”  </p>
+<h3 id="转化率"><a href="#转化率" class="headerlink" title="转化率"></a>转化率</h3><blockquote>
+<p>一个常用的投资收益的度量标准是<strong>转化率</strong>。通过跟踪弄有百分之多少的用户被你“转化”到了下一个步骤，就能衡量你的网站在达到“商业目的”方面的效率有多高。  </p>
+</blockquote>
+<p>刚好最近在做留存分析的界面，看到书中提到的转化率，不免心中有点点融会贯通的感觉。为了提高转化率，用户体验可以围绕“帮助人们工作得更快”和“减少他们犯错的几率”这两个方面进行改进。通过转化率可以量化用户体验对于用户留存的贡献值。  </p>
+<h3 id="概念模型"><a href="#概念模型" class="headerlink" title="概念模型"></a>概念模型</h3><blockquote>
+<p>用户对于“交互组件将怎样工作”的观点成为<strong>概念模型</strong>。  </p>
+</blockquote>
+<p>书中列举了两个例子：购物车和未改版前的西南航空公司网站。电子商务网站的购物车的图标能很形象地让用户明白它的作用，与之相反的是西南航空的网站：首页是一张客户服务的书桌的图片，书桌上一边堆着简介的小册子，另一边放着电话。因为过分运用概念模型，反而适得其反。脑补一下，你肯定觉得网站做成这样简直不可思议。<br>现实和概念，就像生活和艺术，概念源于生活，但要经过抽象后高于生活。  </p>
+<h3 id="命名原则-nomenclature"><a href="#命名原则-nomenclature" class="headerlink" title="命名原则  nomenclature"></a>命名原则  nomenclature</h3><p>好的命名原则可以辅助结构层让用户更好地找到他们想走的路。  </p>
+<ul>
+<li>受控词典  controlled vocabulary<blockquote>
+<p>受控词典是网站使用的一套标准语言。与用户谈话并了解他们的沟通方式，是开发出一个让用户感到自然的命名原则系统的最有效方式。  </p>
+</blockquote>
+</li>
+<li>类词词典 thesaurus  <blockquote>
+<p>类词词典会提供常用的、但未纳入该网站标准用语的词汇以供选择，你可添加内部专用术语、速写语、俚语或缩写词等与其相对应的词汇进行补充。  </p>
+</blockquote>
+</li>
+<li>元数据 metadata<br>元数据是“关于信息的信息”，即以一种结构化的方式来描述内容的信息。构建受控词典和类词词典对于建立包含元数据的系统特别有用。  </li>
+</ul>
+<h3 id="视觉词典-visual-vocabulary"><a href="#视觉词典-visual-vocabulary" class="headerlink" title="视觉词典 visual vocabulary"></a>视觉词典 visual vocabulary</h3><p>作者创建的图解网站结构的系统——视觉词典。详情可见——<a href="www.jjg.net/ia/visvocab">视觉词典文档</a>。</p>
+<h3 id="用户习惯与布局"><a href="#用户习惯与布局" class="headerlink" title="用户习惯与布局"></a>用户习惯与布局</h3><blockquote>
+<p>习惯使我们可以把反射作用应用到不同的环境中。  </p>
+</blockquote>
+<p>文中举例，有的制造商试着设计一些不符合“三行四列”的按钮布局的电话，结果每一次打电话时大约需要花3秒钟左右。一个不符合习惯的设计使得一件“下意识就能完成的事情”变成了“难以忍受的缓慢”。对于用户而言，这3秒钟不仅仅是时间的浪费，还有耐心的消磨和被挫折感占据的沮丧。在没有充分理由和明显益处时，不要轻易尝试强行通过界面改变用户习惯。</p>
+<h3 id="关于文档"><a href="#关于文档" class="headerlink" title="关于文档"></a>关于文档</h3><blockquote>
+<p>当然，所有这些文档是大量的工作，但是有一个很好的理由值得去做：随着时间的推移，我们的决策原因会逐渐从记忆中消失。那些“在某种特殊环境下用来解决某个具体问题的临时决策”和那些“为了形成将来的设计工作的基础而有意识地做出来的决策”会混杂在一起。   </p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由于对于软件整体缺乏认知，读后感并没有按照书中的五个层面分别展开。只是总结了看书过程中觉得比较过瘾的部分。在开发过程中可以结合这些概念和观点，致力于创造出更好的用户体验。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/17/2017-0917-learningGulp01/" rel="next" title="前端自动化工具 gulp 入门">
+                <i class="fa fa-chevron-left"></i> 前端自动化工具 gulp 入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/15/dataStructure-and-dataType-in-angular2/" rel="prev" title="Angular2 中的数据处理相关总结">
+                Angular2 中的数据处理相关总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wustdong.github.io/images/avatar.jpeg"
+               alt="Jing" />
+          <p class="site-author-name" itemprop="name">Jing</p>
+           
+              <p class="site-description motion-element" itemprop="description">千里之行，始于足下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#产品设计-VS-用户体验设计"><span class="nav-number">1.</span> <span class="nav-text">产品设计 VS 用户体验设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转化率"><span class="nav-number">2.</span> <span class="nav-text">转化率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念模型"><span class="nav-number">3.</span> <span class="nav-text">概念模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名原则-nomenclature"><span class="nav-number">4.</span> <span class="nav-text">命名原则  nomenclature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视觉词典-visual-vocabulary"><span class="nav-number">5.</span> <span class="nav-text">视觉词典 visual vocabulary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户习惯与布局"><span class="nav-number">6.</span> <span class="nav-text">用户习惯与布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于文档"><span class="nav-number">7.</span> <span class="nav-text">关于文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jing</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

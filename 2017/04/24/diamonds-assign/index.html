@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wustdong.github.io/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在一次笔试中遇到的一个逻辑题：五个同样绝顶聪明的强盗，盗取100颗价值连城的钻石，现在决定瓜分策略。随机抽签决定编号，按编号1，2，3，4，5顺序依次发言。每个发言者如果投票支持人数等于或者超过总在场人数的一半，就通过提案，否则将被杀死。请问最终的分配策略是怎样的？       以下解析中每次都依次重新排号，方便推理。例如只剩3个人时，则按照原来的顺序依次编号为1，2，3. 只剩两个人分配情况为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分钻石游戏">
+<meta property="og:url" content="https://wustdong.github.io/2017/04/24/diamonds-assign/index.html">
+<meta property="og:site_name" content="晶怪的小屋">
+<meta property="og:description" content="在一次笔试中遇到的一个逻辑题：五个同样绝顶聪明的强盗，盗取100颗价值连城的钻石，现在决定瓜分策略。随机抽签决定编号，按编号1，2，3，4，5顺序依次发言。每个发言者如果投票支持人数等于或者超过总在场人数的一半，就通过提案，否则将被杀死。请问最终的分配策略是怎样的？       以下解析中每次都依次重新排号，方便推理。例如只剩3个人时，则按照原来的顺序依次编号为1，2，3. 只剩两个人分配情况为">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-04-24T11:14:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分钻石游戏">
+<meta name="twitter:description" content="在一次笔试中遇到的一个逻辑题：五个同样绝顶聪明的强盗，盗取100颗价值连城的钻石，现在决定瓜分策略。随机抽签决定编号，按编号1，2，3，4，5顺序依次发言。每个发言者如果投票支持人数等于或者超过总在场人数的一半，就通过提案，否则将被杀死。请问最终的分配策略是怎样的？       以下解析中每次都依次重新排号，方便推理。例如只剩3个人时，则按照原来的顺序依次编号为1，2，3. 只剩两个人分配情况为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wustdong.github.io/2017/04/24/diamonds-assign/"/>
+
+
+
+
+
+  <title>分钻石游戏 | 晶怪的小屋</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晶怪的小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://wustdong.github.io/2017/04/24/diamonds-assign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://wustdong.github.io/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晶怪的小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                分钻石游戏
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T16:56:18+08:00">
+                2017-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/逻辑题/" itemprop="url" rel="index">
+                    <span itemprop="name">逻辑题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>在一次笔试中遇到的一个逻辑题：五个同样绝顶聪明的强盗，盗取100颗价值连城的钻石，现在决定瓜分策略。随机抽签决定编号，按编号1，2，3，4，5顺序依次发言。每个发言者如果投票支持人数等于或者超过总在场人数的一半，就通过提案，否则将被杀死。请问最终的分配策略是怎样的？  </p>
+</blockquote>
+<p>   以下解析中每次都<strong>依次重新排号</strong>，方便推理。例如只剩3个人时，则按照原来的顺序依次编号为1，2，3.</p>
+<h2 id="只剩两个人"><a href="#只剩两个人" class="headerlink" title="只剩两个人"></a>只剩两个人</h2><p>分配情况为1号100颗，2号为0颗。因为此时一半即为1，1号同意，提案通过。自己利益最大化。  </p>
+<h2 id="只剩三个人"><a href="#只剩三个人" class="headerlink" title="只剩三个人"></a>只剩三个人</h2><p>鉴于只剩2个人的情况，那么最后一个发言者肯定会支持第一个发言的人，否则他将一颗都没有。如此，1号发言者需争取一个（2&gt;=3/2）支持者即可通过方案，1号只需给3号一颗（1&gt;0，好过没有）。所以，1号的方案是:给自己99颗，给3号1颗。  </p>
+<h2 id="剩四个人"><a href="#剩四个人" class="headerlink" title="剩四个人"></a>剩四个人</h2><p>鉴于只剩3个人的情况，上述情况的2号会避免出现只剩3个人的局面，也就是说他将支持此局第一个发言者。在此局，3号会支持1号。加之(2&gt;=4/2),因此不难得出，此局分配方式为，1号99颗，3号1颗。  </p>
+<h2 id="问题初始：五个人"><a href="#问题初始：五个人" class="headerlink" title="问题初始：五个人"></a>问题初始：五个人</h2><p>鉴于4个人的分配情况，那么此局的1号发言者只需争取3号和5号（也就是只剩4个人时的2号和4号，因为他们在只剩4个人的情况时一颗也没有得到）。同样，为争取到3号和5号，1号需要分一部分给他们，那么分多少呢？1&gt;0，据说这也是经济学里的一个典型盈利模式，即使利益分配极不均衡，但是1&gt;0.那么5个人的分配情况就是1号98颗钻石，3号和5号各一颗。  </p>
+<p>最开始分析这个问题的时候，也是从总人数的一半来分析的，但是从5个人开始分析，会发现后面没有支持。然后就得想着倒推。算法中的递归与分治思想。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/24/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/24/hexo-build-blog/" rel="prev" title="Hexo搭建个人博客+ NexT主题配置 （Mac篇）">
+                Hexo搭建个人博客+ NexT主题配置 （Mac篇） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wustdong.github.io/images/avatar.jpeg"
+               alt="Jing" />
+          <p class="site-author-name" itemprop="name">Jing</p>
+           
+              <p class="site-description motion-element" itemprop="description">千里之行，始于足下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#只剩两个人"><span class="nav-number">1.</span> <span class="nav-text">只剩两个人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只剩三个人"><span class="nav-number">2.</span> <span class="nav-text">只剩三个人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剩四个人"><span class="nav-number">3.</span> <span class="nav-text">剩四个人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题初始：五个人"><span class="nav-number">4.</span> <span class="nav-text">问题初始：五个人</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jing</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

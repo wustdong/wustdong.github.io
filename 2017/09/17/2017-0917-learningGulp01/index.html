@@ -1,0 +1,877 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wustdong.github.io/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="改动项目文件，查看效果手动去刷新浏览器？项目打包上传到服务器，发布版本后结果测试还是上一个版本？添加 jslint ,统一代码风格？   第一步：gulp 安装首先，最基本也最重要的是，我们需要搭建 node 环境。首推的是先安装 npm,然后通过npm安装项目需要的 node版本。接下来使用以下命令安装全局 gulp:    1sudo npm install -g gulp 其次，我们需要将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端自动化工具 gulp 入门">
+<meta property="og:url" content="https://wustdong.github.io/2017/09/17/2017-0917-learningGulp01/index.html">
+<meta property="og:site_name" content="晶怪的小屋">
+<meta property="og:description" content="改动项目文件，查看效果手动去刷新浏览器？项目打包上传到服务器，发布版本后结果测试还是上一个版本？添加 jslint ,统一代码风格？   第一步：gulp 安装首先，最基本也最重要的是，我们需要搭建 node 环境。首推的是先安装 npm,然后通过npm安装项目需要的 node版本。接下来使用以下命令安装全局 gulp:    1sudo npm install -g gulp 其次，我们需要将">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-24T13:43:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端自动化工具 gulp 入门">
+<meta name="twitter:description" content="改动项目文件，查看效果手动去刷新浏览器？项目打包上传到服务器，发布版本后结果测试还是上一个版本？添加 jslint ,统一代码风格？   第一步：gulp 安装首先，最基本也最重要的是，我们需要搭建 node 环境。首推的是先安装 npm,然后通过npm安装项目需要的 node版本。接下来使用以下命令安装全局 gulp:    1sudo npm install -g gulp 其次，我们需要将">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wustdong.github.io/2017/09/17/2017-0917-learningGulp01/"/>
+
+
+
+
+
+  <title>前端自动化工具 gulp 入门 | 晶怪的小屋</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晶怪的小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://wustdong.github.io/2017/09/17/2017-0917-learningGulp01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://wustdong.github.io/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晶怪的小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端自动化工具 gulp 入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-17T13:29:06+08:00">
+                2017-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Gulp/" itemprop="url" rel="index">
+                    <span itemprop="name">Gulp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>改动项目文件，查看效果手动去刷新浏览器？<br>项目打包上传到服务器，发布版本后结果测试还是上一个版本？<br>添加 jslint ,统一代码风格？ </p>
+</blockquote>
+<h2 id="第一步：gulp-安装"><a href="#第一步：gulp-安装" class="headerlink" title="第一步：gulp 安装"></a>第一步：gulp 安装</h2><p>首先，最基本也最重要的是，我们需要搭建 node 环境。首推的是先安装 npm,然后通过npm安装项目需要的 node版本。接下来使用以下命令安装全局 gulp:   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g gulp</div></pre></td></tr></table></figure>
+<p>其次，我们需要将gulp安装到项目本地:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install —-save-dev gulp</div></pre></td></tr></table></figure>
+<p>并将信息更新到 package.json文件中,更新 devDependencies(–save自动更新dependencies字段值)，想要更加深入的了解它可以看看<a href="https://github.com/ericdum/mujiang.info/issues/6/" target="_blank" rel="external">package.json文档</a>。  </p>
+<h2 id="第二步：新建-gulpfile-js-文件"><a href="#第二步：新建-gulpfile-js-文件" class="headerlink" title="第二步：新建 gulpfile.js 文件"></a>第二步：新建 gulpfile.js 文件</h2><p>现在我们需要先确定项目需要gulp执行哪些任务。  </p>
+<ul>
+<li>检查javascript</li>
+<li>编译scss文件为css文件</li>
+<li>监测文件改变，自动刷新浏览器</li>
+<li>给js,css,img文件添加版本号</li>
+<li>合并压缩文件   </li>
+</ul>
+<h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-jslint gulp-sass</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-rev gulp-rev-collector // 添加版本号</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-concat gulp-uglify  // 合并压缩</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm  install  runSequence browserSync reload  // 指定执行顺序，自动刷新</div></pre></td></tr></table></figure>
+<h3 id="2-新建-gulpfile-js-文件"><a href="#2-新建-gulpfile-js-文件" class="headerlink" title="2. 新建 gulpfile.js 文件"></a>2. 新建 gulpfile.js 文件</h3><p>gulp 的 5 个 API： task, run, watch, src 和 dest，详解可参考文档<a href="http://www.cnblogs.com/2050/p/4198792.html" target="_blank" rel="external"> gulp 的 API 介绍</a>。还有pipe(),Unix操作系统的管道（pipe）思想，前一级的输出，直接变成后一级的输入。具体参见<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md" target="_blank" rel="external"> API 官方文档</a>。<br> 在项目根目录新建 gulpfile.js 文件。我们运行项目时，在命令行可以通过 gulp 命令直接运行，此时，分为开发阶段和打包阶段，得到不同的 dist 文件。示例如下：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"> // 方便测试时使用，浏览器同步更改</div><div class="line">gulp.task(&apos;dev&apos;, [&apos;clean&apos;], function () &#123;</div><div class="line">  runSequence([&apos;html&apos;, &apos;img&apos;, &apos;css&apos;, &apos;js&apos;, &apos;uglify&apos;], &apos;revimg&apos;, &apos;rev&apos;, function () &#123;</div><div class="line">    browserSync.init(&#123;</div><div class="line">      notify: false,</div><div class="line">      logPrefix: &apos;AS&apos;,</div><div class="line">      server: &#123;</div><div class="line">        baseDir: &apos;dist&apos;,</div><div class="line">        index: &apos;index.html&apos;</div><div class="line">      &#125;,</div><div class="line">      port: 3000</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">  browserSync.watch([&apos;*.html&apos;, &apos;assets/template/*.html&apos;]).on(&apos;change&apos;, function () &#123;</div><div class="line">    runSequence(&apos;html&apos;, &apos;revimg&apos;, &apos;rev&apos;, reload);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  browserSync.watch([&apos;assets/imgs/**/*.*&apos;], function () &#123;</div><div class="line">    runSequence(&apos;cleanimg&apos;,&apos;img&apos;, &apos;revimg&apos;, reload);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  browserSync.watch(&apos;assets/css/**/*.scss&apos;).on(&apos;change&apos;, function () &#123;</div><div class="line">    runSequence(&apos;cleancss&apos;,&apos;css&apos;, &apos;rev&apos;, reload);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  browserSync.watch([&apos;assets/js/**/*.js&apos;]).on(&apos;change&apos;, function () &#123;</div><div class="line">    runSequence(&apos;cleanjs&apos;, &apos;js&apos;, &apos;rev&apos;, reload);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"> // 打包时使用</div><div class="line"> gulp.task(&apos;dist&apos;, [&apos;clean&apos;], function () &#123;</div><div class="line">   runSequence([&apos;html&apos;, &apos;img&apos;, &apos;css&apos;, &apos;js&apos;, &apos;uglify&apos;], &apos;revimg&apos;, &apos;rev&apos;, function () &#123;</div><div class="line">     browserSync.init(&#123;</div><div class="line">       notify: false,</div><div class="line">       logPrefix: &apos;AS&apos;,</div><div class="line">       server: &#123;</div><div class="line">         baseDir: &apos;dist&apos;,</div><div class="line">         index: &apos;index.html&apos;</div><div class="line">       &#125;,</div><div class="line">       port: 3000</div><div class="line">     &#125;);</div><div class="line">   &#125;);</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
+<h2 id="踩坑系列"><a href="#踩坑系列" class="headerlink" title="踩坑系列"></a>踩坑系列</h2><h3 id="1-添加版本号"><a href="#1-添加版本号" class="headerlink" title="1. 添加版本号"></a>1. 添加版本号</h3><p>gulp 插件很多，当想要实现某一个具体功能时，开始搜到的都是需要更改 node 文件，这对于多人合作开发的项目很不友好，你改动的是你本地的 node 文件,而我们上传代码是去掉 node-modules 模块的。感谢 frank 及时阻止我这愚昧的跟随者。谷歌查询所需插件，最好直接去官网找，确定插件后，明确每个函数的具体作用（因为官网给的例子并不详细，具体实现需要你结合项目情况来配置），才能用好插件。以下以 css 文件为例，详细介绍如何添加版本号：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">gulp.task(&apos;css&apos;, function () &#123;</div><div class="line">  return gulp.src(&apos;assets/css/**/*.scss&apos;)</div><div class="line">    .pipe(sass(&#123;</div><div class="line">      precision: 10,</div><div class="line">      onError: console.error.bind(console, &apos;Sass error:&apos;)</div><div class="line">    &#125;))</div><div class="line">    .pipe(autoPrefixer(&#123;</div><div class="line">      browsers: AUTOPREFIXER_BROWSERS</div><div class="line">    &#125;))</div><div class="line">    .pipe(concat(&apos;index.css&apos;))</div><div class="line">    .pipe(rev())</div><div class="line">    .pipe(gulp.dest(&apos;dist/assets/css/&apos;))</div><div class="line">    .pipe(rev.manifest(&apos;rev-css-manifest.json&apos;))</div><div class="line">    .pipe(gulp.dest(&apos;dist/rev/css&apos;))</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>将 scss 文件转化合并为css文件后，rev()就是给 css 文件添加 md5 值。将其输出到后续的目录中。manifest()是记录重命名后的对应关系，同样，将 manifest.json 文件输出到 ‘dist/rev/css’。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"> &quot;index.css&quot;: &quot;index-e970023450.css&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后得到的目录是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> dist</div><div class="line">|____assets</div><div class="line">| |____css</div><div class="line">| |____imgs</div><div class="line">| |____js</div><div class="line">|____originalHtml</div><div class="line">| |____.DS_Store</div><div class="line">| |____index.html</div><div class="line">|____rev</div><div class="line">| |____css</div><div class="line">| |____imgs</div><div class="line">| |____js</div></pre></td></tr></table></figure>
+<p>接下来更新 index.html 文件中的引用：   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> // Html替换css、js文件版本   </div><div class="line">gulp.task(&apos;rev&apos;, function () &#123;</div><div class="line">  return gulp.src([&apos;dist/rev/**/*.json&apos;, &apos;dist/originalHtml/*.html&apos;])</div><div class="line">    .pipe(revCollector())</div><div class="line">    .pipe(gulp.dest(&apos;dist/&apos;));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>revCollector()函数是处理根据前面的json文件，替换掉后面目录中的html文件中对应的引用。<strong><em>注意，这里在开发过程中的task中，因为index文件自身的名字也会添加版本号，导致第一次添加版本号后续的更改，会找不到原始的index.html文件</em></strong>。所以我们在dist目录添加了一个存放原始index.html文件的目录，每次添加版本号的src都定义为originalHtml目录中的index.html文件。同时，还应注意删除/清空dist目录下上一个版本的版本号文件（css,js,img,index）。  </p>
+<h3 id="2-监控内容改变，自动刷新浏览器"><a href="#2-监控内容改变，自动刷新浏览器" class="headerlink" title="2. 监控内容改变，自动刷新浏览器"></a>2. 监控内容改变，自动刷新浏览器</h3><p>index.html 文件中的内容已经更改为最新版本，但是浏览器加载的却仍是上一个版本的内容。查看网页代码发现，浏览器加载的是上一个版本的文件，后来<strong><em>局部注释</em></strong> (不错的/逼不得已的定位Bug的方法) ，发现watch什么都没做，浏览器还是刷新了。原来在 watch 之前的某个 task 里不小心写了 reload。删掉错误的 reload 后，瞬间惊艳了我自己。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">gulp.task(&apos;dev&apos;, [&apos;clean&apos;], function () &#123;</div><div class="line">  runSequence([&apos;html&apos;, &apos;img&apos;, &apos;css&apos;, &apos;js&apos;, &apos;uglify&apos;], &apos;revimg&apos;, &apos;rev&apos;, function () &#123;</div><div class="line">    browserSync.init(&#123;</div><div class="line">      notify: false,</div><div class="line">      logPrefix: &apos;AS&apos;,</div><div class="line">      server: &#123;</div><div class="line">        baseDir: &apos;dist&apos;,</div><div class="line">        index: &apos;index.html&apos;</div><div class="line">      &#125;,</div><div class="line">      port: 3000</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">  browserSync.watch([&apos;*.html&apos;, &apos;assets/template/*.html&apos;]).on(&apos;change&apos;, function () &#123;</div><div class="line">    runSequence(&apos;html&apos;, &apos;revimg&apos;, &apos;rev&apos;, reload);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  browserSync.watch([&apos;assets/imgs/**/*.*&apos;], function () &#123;</div><div class="line">    runSequence(&apos;cleanimg&apos;,&apos;img&apos;, &apos;revimg&apos;, reload);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  browserSync.watch(&apos;assets/css/**/*.scss&apos;).on(&apos;change&apos;, function () &#123;</div><div class="line">    runSequence(&apos;cleancss&apos;,&apos;css&apos;, &apos;rev&apos;, reload);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  browserSync.watch([&apos;assets/js/**/*.js&apos;]).on(&apos;change&apos;, function () &#123;</div><div class="line">    runSequence(&apos;cleanjs&apos;, &apos;js&apos;, &apos;rev&apos;, reload);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h2><p>项目完整示例如下：  </p>
+<pre><code> const gulp = require(&apos;gulp&apos;);
+ const clean = require(&apos;gulp-clean&apos;);
+ const sass = require(&apos;gulp-sass&apos;);
+ const concat = require(&apos;gulp-concat&apos;);
+ const autoPrefixer = require(&apos;gulp-autoprefixer&apos;);
+ const browserSync = require(&apos;browser-sync&apos;).create();
+ const runSequence = require(&apos;run-sequence&apos;);
+ const jshint = require(&apos;gulp-jshint&apos;);
+ const injectPartials = require(&apos;gulp-inject-partials&apos;);
+ const uglify = require(&apos;gulp-uglify&apos;);
+ const rev = require(&apos;gulp-rev&apos;);
+ const revCollector = require(&apos;gulp-rev-collector&apos;);
+ const reload = browserSync.reload;
+ const minifyCss = require(&apos;gulp-clean-css&apos;);
+
+ const AUTOPREFIXER_BROWSERS = [
+   &apos;ie &gt;= 10&apos;,
+   &apos;ie_mob &gt;= 10&apos;,
+   &apos;ff &gt;= 30&apos;,
+   &apos;chrome &gt;= 34&apos;,
+   &apos;safari &gt;= 7&apos;,
+   &apos;opera &gt;= 23&apos;,
+   &apos;ios &gt;= 7&apos;,
+   &apos;android &gt;= 4.4&apos;,
+   &apos;bb &gt;= 10&apos;
+ ];
+
+ gulp.task(&apos;clean&apos;, function () {
+   return gulp.src([&apos;dist&apos;])
+     .pipe(clean());
+ });
+
+ gulp.task(&apos;html&apos;, function () {
+   return gulp.src(&apos;index.html&apos;)
+     .pipe(injectPartials())
+     .pipe(gulp.dest(&apos;dist/&apos;))
+     .pipe(gulp.dest(&apos;dist/originalHtml&apos;));
+ });
+
+ gulp.task(&apos;img&apos;, function () {
+   return gulp.src(&apos;assets/imgs/**/*.*&apos;)
+     .pipe(rev())
+     .pipe(gulp.dest(&apos;dist/assets/imgs/&apos;))
+     .pipe(rev.manifest(&apos;rev-img-manifest.json&apos;))
+     .pipe(gulp.dest(&apos;dist/rev/imgs&apos;));
+ });
+
+ gulp.task(&apos;css&apos;, function () {
+   return gulp.src(&apos;assets/css/**/*.scss&apos;)
+     .pipe(sass({
+       precision: 10,
+       onError: console.error.bind(console, &apos;Sass error:&apos;)
+     }))
+     .pipe(autoPrefixer({
+       browsers: AUTOPREFIXER_BROWSERS
+     }))
+     .pipe(concat(&apos;index.css&apos;))
+     .pipe(rev())
+     .pipe(gulp.dest(&apos;dist/assets/css/&apos;))
+     .pipe(rev.manifest(&apos;rev-css-manifest.json&apos;))
+     .pipe(gulp.dest(&apos;dist/rev/css&apos;))
+ });
+
+ gulp.task(&apos;jshint&apos;, function () {
+   return gulp.src(&apos;assets/js/*.js&apos;)
+     .pipe(jshint())
+     .pipe(jshint.reporter(&apos;jshint-stylish&apos;));
+ });
+
+ gulp.task(&apos;business-js&apos;, function () {
+   return gulp.src([
+       &apos;assets/js/areadata.js&apos;,
+       &apos;assets/js/index.js&apos;,
+       &apos;assets/js/submitajax.js&apos;
+     ])
+     .pipe(concat(&apos;index.js&apos;))
+     .pipe(rev())
+     .pipe(gulp.dest(&apos;dist/assets/js/&apos;))
+     .pipe(rev.manifest(&apos;rev-js-manifest.json&apos;))
+     .pipe(gulp.dest(&apos;dist/rev/js&apos;));
+ });
+
+ gulp.task(&apos;concat&apos;, [&apos;business-js&apos;, &apos;jshint&apos;], function () {
+   return gulp.src([
+       &apos;assets/js/libs/zepto.js&apos;,
+       &apos;assets/js/libs/fastclick.js&apos;,
+       &apos;assets/js/libs/sea.js&apos;
+     ])
+     .pipe(concat(&apos;libs.js&apos;))
+     .pipe(gulp.dest(&apos;dist/assets/js&apos;));
+ });
+
+ gulp.task(&apos;uglify&apos;, function () {
+   return gulp.src(&apos;dist/assets/js/*.js&apos;)
+     .pipe(uglify())
+     .pipe(gulp.dest(&apos;dist/assets/js&apos;));
+ });
+
+ gulp.task(&apos;js&apos;, [&apos;concat&apos;]);
+
+ // Html替换css、js文件版本   
+ gulp.task(&apos;rev&apos;, function () {
+   return gulp.src([&apos;dist/rev/**/*.json&apos;, &apos;dist/originalHtml/*.html&apos;])
+     .pipe(revCollector())
+     .pipe(gulp.dest(&apos;dist/&apos;));
+ });
+
+ // css替换img文件版本   
+ gulp.task(&apos;revimg&apos;, function () {
+   return gulp.src([&apos;dist/rev/**/rev-img-manifest.json&apos;, &apos;dist/assets/css/*.css&apos;])
+     .pipe(revCollector())
+     .pipe(gulp.dest(&apos;dist/assets/css&apos;));
+ });
+
+ gulp.task(&apos;cleanjs&apos;, function () {
+   return gulp.src([&apos;dist/assets/js/&apos;])
+     .pipe(clean());
+ });
+ gulp.task(&apos;cleancss&apos;, function () {
+  return gulp.src([&apos;dist/assets/css/&apos;])
+    .pipe(clean());
+});
+gulp.task(&apos;cleanimg&apos;, function () {
+  return gulp.src([&apos;dist/assets/img/&apos;])
+    .pipe(clean());
+});
+</code></pre><p>以上是处理基本的自动化处理逻辑。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>插件就是为了方便才会被推行，要掌握的是具体情况具体分析。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/02/2017-0708-angular/" rel="next" title="8月小结晶">
+                <i class="fa fa-chevron-left"></i> 8月小结晶
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/24/20170924-the-element-of-user-experience/" rel="prev" title="《用户体验要素》读后感">
+                《用户体验要素》读后感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wustdong.github.io/images/avatar.jpeg"
+               alt="Jing" />
+          <p class="site-author-name" itemprop="name">Jing</p>
+           
+              <p class="site-description motion-element" itemprop="description">千里之行，始于足下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步：gulp-安装"><span class="nav-number">1.</span> <span class="nav-text">第一步：gulp 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步：新建-gulpfile-js-文件"><span class="nav-number">2.</span> <span class="nav-text">第二步：新建 gulpfile.js 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装依赖"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-新建-gulpfile-js-文件"><span class="nav-number">2.2.</span> <span class="nav-text">2. 新建 gulpfile.js 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑系列"><span class="nav-number">3.</span> <span class="nav-text">踩坑系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-添加版本号"><span class="nav-number">3.1.</span> <span class="nav-text">1. 添加版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-监控内容改变，自动刷新浏览器"><span class="nav-number">3.2.</span> <span class="nav-text">2. 监控内容改变，自动刷新浏览器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整示例"><span class="nav-number">4.</span> <span class="nav-text">完整示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jing</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

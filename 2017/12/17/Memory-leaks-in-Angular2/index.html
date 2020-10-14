@@ -1,0 +1,740 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wustdong.github.io/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="问题描述：初步验收时提的 bug: 看板页面太卡，用户在页面连续多次执行切换操作，会将卡顿传染到其他页面。调出 chrome 任务管理器，发现内存和cpu 占用率一直在涨。确定为系统存在内存泄露问题。 问题定位：1、某个页面图表数据较多。整个渲染流程为:向后台请求数据 chartdata，然后 将 chartdata 赋值给图表组件（这一步就是渲染操作），由于后台返回的数据是很快的，那么意味着多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memory leaks in Angular2">
+<meta property="og:url" content="https://wustdong.github.io/2017/12/17/Memory-leaks-in-Angular2/index.html">
+<meta property="og:site_name" content="晶怪的小屋">
+<meta property="og:description" content="问题描述：初步验收时提的 bug: 看板页面太卡，用户在页面连续多次执行切换操作，会将卡顿传染到其他页面。调出 chrome 任务管理器，发现内存和cpu 占用率一直在涨。确定为系统存在内存泄露问题。 问题定位：1、某个页面图表数据较多。整个渲染流程为:向后台请求数据 chartdata，然后 将 chartdata 赋值给图表组件（这一步就是渲染操作），由于后台返回的数据是很快的，那么意味着多">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-17T08:48:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Memory leaks in Angular2">
+<meta name="twitter:description" content="问题描述：初步验收时提的 bug: 看板页面太卡，用户在页面连续多次执行切换操作，会将卡顿传染到其他页面。调出 chrome 任务管理器，发现内存和cpu 占用率一直在涨。确定为系统存在内存泄露问题。 问题定位：1、某个页面图表数据较多。整个渲染流程为:向后台请求数据 chartdata，然后 将 chartdata 赋值给图表组件（这一步就是渲染操作），由于后台返回的数据是很快的，那么意味着多">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wustdong.github.io/2017/12/17/Memory-leaks-in-Angular2/"/>
+
+
+
+
+
+  <title>Memory leaks in Angular2 | 晶怪的小屋</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晶怪的小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://wustdong.github.io/2017/12/17/Memory-leaks-in-Angular2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://wustdong.github.io/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晶怪的小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Memory leaks in Angular2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T16:41:26+08:00">
+                2017-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>初步验收时提的 bug: 看板页面太卡，用户在页面连续多次执行切换操作，会将卡顿传染到其他页面。调出 chrome 任务管理器，发现内存和cpu 占用率一直在涨。确定为系统存在内存泄露问题。</p>
+<h3 id="问题定位："><a href="#问题定位：" class="headerlink" title="问题定位："></a>问题定位：</h3><p>1、某个页面图表数据较多。整个渲染流程为:向后台请求数据 chartdata，然后 将 chartdata 赋值给图表组件（这一步就是渲染操作），由于后台返回的数据是很快的，那么意味着多个图表会同时渲染， 会导致cpu 占用率高的现象；  </p>
+<p>2、我们将图表限制为 6个，发现将指标放在 图表区域来回切换时（图表的 tooltip 会展示相应数据），还是会出现明显的卡顿现象；同时页面来回切换，内存和 cpu 占用率还是不停增长；</p>
+<ul>
+<li>使用 chrome 的开发者工具的 memory 快照，发现有些页面的内存在页面销毁时并没有释放；</li>
+<li>同时，detectchange操作耗时异常；  </li>
+</ul>
+<p>3、搜索引起 angular2 中的内存泄露问题的原因:</p>
+<blockquote>
+<p>“你可能知道当你订阅 Observable 对象或设置事件监听时，在某个时间点，你需要执行取消订阅操作，进而释放操作系统的内存。否则，你的应用程序可能会出现内存泄露。”  </p>
+</blockquote>
+<h3 id="解决方案（敲黑板，划重点了-）"><a href="#解决方案（敲黑板，划重点了-）" class="headerlink" title="解决方案（敲黑板，划重点了..）"></a>解决方案（敲黑板，划重点了..）</h3><p>以上三个问题，分别给出对应的解决方案，实操后，页面操作快得让人心跳加速。<br>1、 图表懒加载<br>从后台拿到 chartdata 数据后，暂存起来，检测浏览器视图窗口中的图表，只渲染在视图窗口内的图表；推荐插件 =&gt;<br>angular2 中的检测元素是否在视图窗口的插件 <a href="!https://github.com/k3nsei/ng-in-viewport">ng-in-viewport</a><br>2、变化检测策略改为 onpush<br>项目中用到最频繁的是下拉框组件,尤其是支持多选时，用户一次选中的数据可能高达上百。当组件的 changeDetection 为默认时，组件的每次变化检测都会检查内部的所有数据（引用对象也会被深度遍历），这时非常耗时耗资源的，影响性能。而当值为 OnPush 时，组件的变化检测只检查输入属性的值（@Input 修饰的变量）是否发生变化。<br>因此我们将基础组件的变化检测策略改为了 OnPush ，在需要触发改变执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class ChangeDetectorRef &#123;</div><div class="line">  // 变化检测类提供的主要接口</div><div class="line">  //...</div><div class="line">  detach(): void</div><div class="line">  detectChanges(): void</div><div class="line">&#125;</div><div class="line">this.cd.detectChange(); // 手动触发变化检测</div><div class="line"></div><div class="line">// 组件销毁时，调用 detach() 方法从变化检测树中分离变化检测器</div></pre></td></tr></table></figure></p>
+<p>3、释放订阅资源<br>何时释放订阅问题早在 2016年6月就有人在 stackoverflow 上探讨过了。以下为推荐也经过验证的实战方案:</p>
+<pre><code>export class MyThingComponent implements OnDestroy, OnInit {
+    private ngUnsubscribe: Subject = new Subject();
+
+    constructor(
+        private myThingService: MyThingService,
+    ) { }
+
+    ngOnInit() {
+        this.myThingService.getThings()
+            .takeUntil(this.ngUnsubscribe)
+            .subscribe(things =&gt; console.log(things));
+
+        /* if using lettable operators in rxjs ^5.5.0
+        this.myThingService.getThings()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(things =&gt; console.log(things));
+        */
+
+        this.myThingService.getOtherThings()
+            .takeUntil(this.ngUnsubscribe)
+            .subscribe(things =&gt; console.log(things));
+
+    }
+
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
+}
+</code></pre><p>参考文献:</p>
+<ul>
+<li><a href="!https://segmentfault.com/a/1190000010104703#articleHeader10">Angular 中何时取消订阅</a></li>
+<li><a href="!https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscriptio"> Angular/RxJs When should I unsubscribe from Subscription</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/12/fix-table-thead/" rel="next" title="Css Transform 固定表头">
+                <i class="fa fa-chevron-left"></i> Css Transform 固定表头
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/17/2018-上半年总结/" rel="prev" title="二零一八「 二分之一 」">
+                二零一八「 二分之一 」 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wustdong.github.io/images/avatar.jpeg"
+               alt="Jing" />
+          <p class="site-author-name" itemprop="name">Jing</p>
+           
+              <p class="site-description motion-element" itemprop="description">千里之行，始于足下</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述："><span class="nav-number">1.</span> <span class="nav-text">问题描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题定位："><span class="nav-number">2.</span> <span class="nav-text">问题定位：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案（敲黑板，划重点了-）"><span class="nav-number">3.</span> <span class="nav-text">解决方案（敲黑板，划重点了..）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jing</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
